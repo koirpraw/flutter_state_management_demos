@@ -9,9 +9,10 @@ import 'addTodo_page.dart';
 class TodoHomePage extends StatelessWidget {
   TodoHomePage({super.key, required this.title});
   late String title;
-
+// this title is passed from the AddTodoPage through Navigator.pop method when user adds a new task
   @override
   Widget build(BuildContext context) {
+    // here we are creating an instance of TodoProvider called todoList which will be used to get the list of tasks
     final todoList = Provider.of<TodoProvider>(context).todoList;
     return Scaffold(
       appBar: AppBar(

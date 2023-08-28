@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:provider_todo/model/todo_model.dart';
 
 class TodoProvider with ChangeNotifier {

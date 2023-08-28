@@ -11,9 +11,12 @@ class AddTodoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // creating an instance of TodoProvider called task
+    // we will use this instance to call the addTask method below to add a new task
+    // we are using listen: false because we don't want to rebuild the widget tree
     final task = Provider.of<TodoProvider>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Todo")),
+      appBar: AppBar(title: const Text("Add Task"), centerTitle: true),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -21,9 +24,13 @@ class AddTodoPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+                maxLines: 2,
                 decoration: const InputDecoration(
-                  labelText: "Title",
-                  hintText: "Enter task title",
+                  labelText: "task title",
+                  hintText: "Enter your todo task here",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                  ),
                 ),
                 controller: titleController,
               ),
@@ -32,8 +39,9 @@ class AddTodoPage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      task.addTask(
-                          Todo(title: titleController.text, isDone: false));
+                      task.addTask(Todo(title: titleController.text));
+                      // we are adding task title using addTask method defined in TodoProvider
+                      // The title will be passed back to the TodoHomePage through already defined constructor with the help of Navigator.pop method
 
                       Navigator.pop(context, titleController.text);
                     },
