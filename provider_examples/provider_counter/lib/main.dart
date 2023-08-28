@@ -11,7 +11,7 @@ void main() {
 
 class CounterProvider extends ChangeNotifier {
   int _count = 0;
-  int get getCountValue => _count;
+  int get countValue => _count;
 
   void incrementCounter() {
     _count++;
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
             height: 24,
           ),
           Text(
-            "${counter.getCountValue}",
+            "${counter.countValue}",
             style: const TextStyle(fontSize: 32),
           ),
           const SizedBox(
@@ -126,7 +126,7 @@ class SecondPage extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Text("${counter.getCountValue}")
+          Text("${counter.countValue}")
         ],
       )),
     );
