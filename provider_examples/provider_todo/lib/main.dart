@@ -14,6 +14,6 @@ class TodoProviderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (_) => TodoProvider(),
-        child: const MaterialApp(home: TodoHomePage()));
+        child: MaterialApp(home: TodoHomePage(title: " ")));
   }
 }

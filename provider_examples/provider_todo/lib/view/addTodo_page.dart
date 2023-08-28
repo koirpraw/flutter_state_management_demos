@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_todo/model/todo_model.dart';
+
+import '../provider/todo_provider.dart';
 
 class AddTodoPage extends StatelessWidget {
-  const AddTodoPage({Key? key}) : super(key: key);
+  AddTodoPage({Key? key}) : super(key: key);
+
+  final titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final task = Provider.of<TodoProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(title: const Text("Add Todo")),
       body: Center(
@@ -18,12 +25,18 @@ class AddTodoPage extends StatelessWidget {
                   labelText: "Title",
                   hintText: "Enter task title",
                 ),
+                controller: titleController,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      task.addTask(
+                          Todo(title: titleController.text, isDone: false));
+
+                      Navigator.pop(context, titleController.text);
+                    },
                     child: const Text("Add"),
                   ),
                   const SizedBox(width: 20),

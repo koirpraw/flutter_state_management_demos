@@ -5,8 +5,10 @@ import 'package:provider_todo/provider/todo_provider.dart';
 
 import 'addTodo_page.dart';
 
+// ignore: must_be_immutable
 class TodoHomePage extends StatelessWidget {
-  const TodoHomePage({super.key});
+  TodoHomePage({super.key, required this.title});
+  late String title;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,14 @@ class TodoHomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final todo = todoList[index];
                 return ListTile(
-                  title: Text(todo.title),
+                  title: todo.isDone
+                      ? Text(
+                          todo.title,
+                          style: const TextStyle(
+                              decoration: TextDecoration.lineThrough,
+                              color: Colors.grey),
+                        )
+                      : Text(todo.title),
                   leading: Checkbox(
                     value: todo.isDone,
                     onChanged: (_) =>
@@ -46,6 +55,17 @@ class TodoHomePage extends StatelessWidget {
                   ),
                 );
               }),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddTodoPage()));
+        },
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
