@@ -1,4 +1,7 @@
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
+import "package:provider_todo/provider/todo_provider.dart";
+import "package:provider_todo/view/todo_home_page.dart";
 
 void main() {
   runApp(const TodoProviderApp());
@@ -9,22 +12,8 @@ class TodoProviderApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TodoHomePage();
-  }
-}
-
-class TodoHomePage extends StatelessWidget {
-  const TodoHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Provider Todo-Home"),
-        ),
-        body: const Center(child: Text("Todo Home")),
-      ),
-    );
+    return ChangeNotifierProvider(
+        create: (_) => TodoProvider(),
+        child: const MaterialApp(home: TodoHomePage()));
   }
 }
